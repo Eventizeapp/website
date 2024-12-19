@@ -51,8 +51,14 @@
         }
 
         .logo img {
-            height: 40px;
+            height: 50px; /* Augmenté la taille */
             width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
         }
 
         .logo-text {
@@ -82,32 +88,34 @@
         }
 
         .app-preview {
-            max-width: 1200px;
+            max-width: 1000px; /* Réduit pour un meilleur centrage */
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px;
             display: flex;
-            gap: 2rem;
+            justify-content: center; /* Centre les images */
             align-items: center;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
         .app-preview img {
-            width: calc(50% - 1rem);
-            max-width: 400px;
+            width: 45%; /* Ajusté pour un meilleur ratio */
+            max-width: 380px;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .app-preview img:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
         }
 
         @media (max-width: 768px) {
             .app-preview img {
-                width: 100%;
-                max-width: 300px;
+                width: 90%;
+                max-width: 340px;
                 margin: 0 auto;
             }
         }
@@ -141,11 +149,12 @@
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .feature-icon {
@@ -173,7 +182,29 @@
             text-decoration: none;
             border-radius: 30px;
             font-weight: 500;
-            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .button:hover::after {
+            left: 100%;
         }
 
         .button:hover {
@@ -215,7 +246,53 @@
         .contact-email:hover {
             border-color: var(--primary-color);
         }
+
+        /* Animation des éléments au défilement */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
     </style>
+    <script>
+        // Animation au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = `fadeInUp 0.6s ease-out forwards ${entry.target.dataset.delay || '0s'}`;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.features-grid > *, .app-preview img, .hero > *').forEach((el, index) => {
+                el.style.opacity = '0';
+                el.dataset.delay = `${index * 0.2}s`;
+                observer.observe(el);
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="nav">
@@ -237,8 +314,8 @@
     </section>
 
     <section class="app-preview">
-        <img src="preview1.png" alt="Aperçu de l'application Eventize">
-        <img src="preview2.png" alt="Fonctionnalités de l'application Eventize">
+        <img src="preview1.png" alt="Aperçu de l'application Eventize" class="animate-on-scroll">
+        <img src="preview2.png" alt="Fonctionnalités de l'application Eventize" class="animate-on-scroll">
     </section>
 
     <section class="features">
