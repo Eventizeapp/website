@@ -82,16 +82,45 @@
         }
 
         .app-preview {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 40px 20px;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .app-preview img {
-            width: 100%;
+            width: calc(50% - 1rem);
+            max-width: 400px;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .app-preview img:hover {
+            transform: translateY(-10px);
+        }
+
+        @media (max-width: 768px) {
+            .app-preview img {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: #2C3E50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+            vertical-align: middle;
         }
 
         .features {
@@ -167,6 +196,25 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .contact {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: var(--background-color);
+        }
+
+        .contact-email {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 2px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-email:hover {
+            border-color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -174,7 +222,7 @@
         <div class="nav-content">
             <div class="logo">
                 <img src="eventize_logo.png" alt="Eventize Logo">
-                
+                <span class="logo-text">Eventize</span>
             </div>
         </div>
     </nav>
@@ -182,11 +230,15 @@
     <section class="hero">
         <h1>Organisez vos événements<br>en toute simplicité</h1>
         <p>Une application moderne et intuitive pour créer, gérer et partager vos événements en quelques clics.</p>
-        <a href="#" class="button">Télécharger l'application</a>
+        <a href="#" class="button" style="cursor: default; opacity: 0.9;">
+            Bientôt disponible
+            <span class="coming-soon">Coming Soon</span>
+        </a>
     </section>
 
     <section class="app-preview">
-        <img src="app-preview.png" alt="Aperçu de l'application Eventize">
+        <img src="preview1.png" alt="Aperçu de l'application Eventize">
+        <img src="preview2.png" alt="Fonctionnalités de l'application Eventize">
     </section>
 
     <section class="features">
@@ -216,8 +268,14 @@
 
     <section class="cta">
         <h2>Prêt à simplifier l'organisation de vos événements ?</h2>
-        <p>Rejoignez Eventize dès aujourd'hui et découvrez une nouvelle façon d'organiser vos événements.</p>
-        <a href="#" class="button">Commencer maintenant</a>
+        <p>Restez informé de la sortie d'Eventize et soyez parmi les premiers à l'utiliser.</p>
+        <a href="mailto:contact.eventize@proton.me" class="button">Nous contacter</a>
+    </section>
+
+    <section class="contact">
+        <h2>Contact</h2>
+        <p style="margin: 1rem 0;">Une question ? N'hésitez pas à nous écrire :</p>
+        <a href="mailto:contact.eventize@proton.me" class="contact-email">contact.eventize@proton.me</a>
     </section>
 
     <footer class="footer">
