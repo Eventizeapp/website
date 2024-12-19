@@ -3,76 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventize - Site Développeur</title>
+    <title>Eventize - Organisation d'événements simplifiée</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
+        :root {
+            --primary-color: #000000;
+            --text-color: #2C3E50;
+            --background-color: #ffffff;
+            --secondary-background: #f8f9fa;
+            --accent-color: #e0e0e0;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            box-sizing: border-box;
         }
-        .container {
-            max-width: 800px;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-content {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .header {
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .hero {
+            padding: 160px 20px 100px;
             text-align: center;
-            margin-bottom: 40px;
+            background-color: var(--background-color);
         }
-        h1 {
-            color: #2C3E50;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
         }
-        .description {
+
+        .hero p {
+            font-size: 1.25rem;
             color: #666;
-            font-size: 1.2em;
-            margin-bottom: 30px;
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .app-preview {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        .app-preview img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .features {
+            padding: 100px 20px;
+            background-color: var(--secondary-background);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--background-color);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 100px 20px;
+            background-color: var(--background-color);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
         .footer {
+            padding: 40px 20px;
             text-align: center;
-            margin-top: 40px;
             color: #666;
-            font-size: 0.9em;
+            background-color: var(--secondary-background);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Eventize</h1>
-            <p class="description">Application de gestion d'événements</p>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="path/to/your/logo.png" alt="Eventize Logo">
+                <span class="logo-text">Eventize</span>
+            </div>
         </div>
+    </nav>
 
-        <div class="card">
-            <h2>À propos</h2>
-            <p>Eventize est une application mobile qui permet de créer et gérer facilement vos événements. Organisez des rencontres, suivez les participants et partagez les moments importants avec vos invités.</p>
-        </div>
+    <section class="hero">
+        <h1>Organisez vos événements<br>en toute simplicité</h1>
+        <p>Une application moderne et intuitive pour créer, gérer et partager vos événements en quelques clics.</p>
+        <a href="#" class="button">Télécharger l'application</a>
+    </section>
 
-        <div class="card">
-            <h2>Fonctionnalités principales</h2>
-            <ul>
-                <li>Création d'événements personnalisés</li>
-                <li>Gestion des participants</li>
-                <li>Partage facile des invitations</li>
-                <li>Suivi des confirmations</li>
-                <li>Interface intuitive</li>
-            </ul>
-        </div>
+    <section class="app-preview">
+        <img src="path/to/app-preview.png" alt="Aperçu de l'application Eventize">
+    </section>
 
-        <div class="footer">
-            <p>© 2024 Eventize. Tous droits réservés.</p>
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">Création simplifiée</h3>
+                <p>Créez un événement en quelques secondes avec une interface intuitive et épurée.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3 class="feature-title">Gestion des invités</h3>
+                <p>Suivez facilement les confirmations et gardez le contact avec vos participants.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3 class="feature-title">Localisation intégrée</h3>
+                <p>Partagez le lieu de l'événement et permettez à vos invités de s'y rendre facilement.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✓</div>
+                <h3 class="feature-title">Tâches et listes</h3>
+                <p>Organisez vos préparatifs avec des listes de tâches et de courses partagées.</p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="cta">
+        <h2>Prêt à simplifier l'organisation de vos événements ?</h2>
+        <p>Rejoignez Eventize dès aujourd'hui et découvrez une nouvelle façon d'organiser vos événements.</p>
+        <a href="#" class="button">Commencer maintenant</a>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Eventize. Tous droits réservés.</p>
+    </footer>
 </body>
 </html>
